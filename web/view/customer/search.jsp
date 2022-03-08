@@ -34,6 +34,14 @@
                     window.location.href = "delete?id=" + id;
                 }
             }
+              function deleteParent(pid)
+            {
+                var result = confirm("Are you sure?");
+                if (result)
+                {
+                    window.location.href = "../parent/delete?pid=" + pid;
+                }
+            }
 
 
         </script>
@@ -83,6 +91,7 @@
             </tr>
             <%}%>
         </table> 
+        <a href="insert">Insert Customer Info</a>
         <table border="1px">
             <tr>
                 <td>Id</td>
@@ -105,15 +114,17 @@
                 <td><%=p.getJob()%></td>
                 <td><%=p.getPname()%></td>
                 <td><%=p.getEmail()%></td>
-                <td>
-
+                 <td> <a href="../parent/edit?pid=<%=p.getId()%>">Edit</a> 
+                       <a href="#" onclick="deleteParent(<%=p.getId()%>)">Delete</a>
                 </td>
             </tr>
             <%}%>
         </table> 
+         <form action="../parent/insert">
+            <input type="submit" value="Insert Customer's Parent Info">
+        </form>
          
-        <a href="pinsert">InsertP</a>  
-        <a href="insert">Insert</a>  
+           
         
     </body>
 </html>

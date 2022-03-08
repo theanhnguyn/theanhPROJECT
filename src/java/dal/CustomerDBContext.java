@@ -103,7 +103,7 @@ public class CustomerDBContext extends DBContext {
                 + "           ,[mid])\n"
                 + "     VALUES\n"
                 + "           (?\n"
-                + "           , ?\n"
+                + "           ,?\n"
                 + "           ,?\n"
                 + "           ,?\n"
                 + "           ,?\n"

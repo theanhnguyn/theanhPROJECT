@@ -5,12 +5,15 @@
  */
 package controller.parent;
 
+import dal.ParentDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Customer;
+import model.Parent;
 
 /**
  *
@@ -27,7 +30,6 @@ public class ParentInsertController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -54,7 +56,40 @@ public class ParentInsertController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String raw_pid = request.getParameter("pid");
+        String raw_cid = request.getParameter("cid");
+        String raw_name = request.getParameter("name");
+        String raw_job = request.getParameter("job");
+        String raw_email = request.getParameter("email");
+        String raw_address = request.getParameter("address");
+        String raw_phoneNumber = request.getParameter("phonenumber");
+
+        int pid = Integer.parseInt(raw_pid); 
+        int cid = Integer.parseInt(raw_cid);
+        String name = raw_name;
+        String job = raw_job;
+        String email = raw_email;
+        String address = raw_address;
+        int phonenumber = Integer.parseInt(raw_phoneNumber);
         
+
+        
+        Customer c = new Customer();
+        c.setId(cid);
+        Parent p = new Parent();
+        p.setPname(name);
+        p.setAddress(address);
+        p.setId(pid);
+        p.setJob(job);
+        p.setEmail(email);
+        p.setPhonenumber(phonenumber);
+        p.setC(c);
+
+        ParentDBContext db = new ParentDBContext();
+        db.insertParent(p);
+
+        //response.getWriter().println("student already added");
+        response.sendRedirect("../customer/search");
     }
 
     /**

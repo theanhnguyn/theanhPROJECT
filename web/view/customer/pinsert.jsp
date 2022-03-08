@@ -12,6 +12,15 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="../parent/insert" method="POST">
+            Id: <input type="text" name="pid"/> <br/>
+            Children ID :<input type ="text" name="cid"><br/>
+            Name: <input type="text" name="name"/> <br/>
+            Address: <input type="text" name="address"/> <br/>
+            Email: <input type="text" name="email"/> <br/>
+            Phone Number <input type="text" name="phonenumber"/> <br/>
+            Job: <input type="text" name="job"/> <br/>
+            <input type="submit" value="Save"/>
+        </form>
     </body>
 </html>

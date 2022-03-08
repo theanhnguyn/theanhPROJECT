@@ -3,27 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.customer;
+package controller.parent;
 
-import dal.CustomerDBContext;
-import dal.MotelDBContext;
 import dal.ParentDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Customer;
-import model.Motel;
 import model.Parent;
 
 /**
  *
  * @author FPTSHOP
  */
-public class SearchController extends HttpServlet {
+public class ParentEditController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,26 +30,7 @@ public class SearchController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-         MotelDBContext dbMotel = new MotelDBContext();
-        ArrayList<Motel> motel = dbMotel.getMotel();
-        request.setAttribute("motel", motel);
-        String raw_mid = request.getParameter("mid");
-        if(raw_mid == null || raw_mid.length() ==0 )
-            raw_mid = "-1";
-        int mid = Integer.parseInt(raw_mid);
-        CustomerDBContext dbCustomer = new CustomerDBContext();
-        ArrayList<Customer> customers = dbCustomer.getCustomers(mid);
-        ParentDBContext dbParent = new ParentDBContext();
-        ArrayList<Parent> parents = dbParent.getParents(mid);
-        request.setAttribute("parents", parents);
-        request.setAttribute("customers", customers);
-        request.setAttribute("mid", mid);
-        //response.getWriter().println("Check:" + customers.size());
-        request.getRequestDispatcher("../view/customer/search.jsp").forward(request, response);
-        
-    }
+     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -67,7 +44,11 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("pid"));
+        ParentDBContext parentDB = new ParentDBContext();
+        Parent parent  = parentDB.getParent(id);
+        request.setAttribute("parent", parent);
+        request.getRequestDispatcher("../view/customer/pedit.jsp").forward(request, response);
     }
 
     /**
@@ -81,7 +62,40 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         String raw_pid = request.getParameter("pid");
+        String raw_cid = request.getParameter("cid");
+        String raw_name = request.getParameter("name");
+        String raw_job = request.getParameter("job");
+        String raw_email = request.getParameter("email");
+        String raw_address = request.getParameter("address");
+        String raw_phoneNumber = request.getParameter("phonenumber");
+
+        int pid = Integer.parseInt(raw_pid); 
+        int cid = Integer.parseInt(raw_cid);
+        String name = raw_name;
+        String job = raw_job;
+        String email = raw_email;
+        String address = raw_address;
+        int phonenumber = Integer.parseInt(raw_phoneNumber);
+        
+
+        
+        Customer c = new Customer();
+        c.setId(cid);
+        Parent p = new Parent();
+        p.setPname(name);
+        p.setAddress(address);
+        p.setId(pid);
+        p.setJob(job);
+        p.setEmail(email);
+        p.setPhonenumber(phonenumber);
+        p.setC(c);
+
+        ParentDBContext db = new ParentDBContext();
+        db.updateParent(p);
+
+        //response.getWriter().println("student already added");
+        response.sendRedirect("../customer/search");
     }
 
     /**

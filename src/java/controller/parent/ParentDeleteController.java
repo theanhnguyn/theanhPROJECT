@@ -3,27 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.customer;
+package controller.parent;
 
-import dal.CustomerDBContext;
-import dal.MotelDBContext;
 import dal.ParentDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Customer;
-import model.Motel;
-import model.Parent;
 
 /**
  *
  * @author FPTSHOP
  */
-public class SearchController extends HttpServlet {
+public class ParentDeleteController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,22 +30,10 @@ public class SearchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         MotelDBContext dbMotel = new MotelDBContext();
-        ArrayList<Motel> motel = dbMotel.getMotel();
-        request.setAttribute("motel", motel);
-        String raw_mid = request.getParameter("mid");
-        if(raw_mid == null || raw_mid.length() ==0 )
-            raw_mid = "-1";
-        int mid = Integer.parseInt(raw_mid);
-        CustomerDBContext dbCustomer = new CustomerDBContext();
-        ArrayList<Customer> customers = dbCustomer.getCustomers(mid);
-        ParentDBContext dbParent = new ParentDBContext();
-        ArrayList<Parent> parents = dbParent.getParents(mid);
-        request.setAttribute("parents", parents);
-        request.setAttribute("customers", customers);
-        request.setAttribute("mid", mid);
-        //response.getWriter().println("Check:" + customers.size());
-        request.getRequestDispatcher("../view/customer/search.jsp").forward(request, response);
+         int id = Integer.parseInt(request.getParameter("pid"));
+        ParentDBContext db = new ParentDBContext();
+        db.deleteParent(id);
+         response.sendRedirect("../customer/search");
         
     }
 
