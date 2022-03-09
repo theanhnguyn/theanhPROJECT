@@ -5,6 +5,7 @@
  */
 package controller.parent;
 
+import controller.auth.BaseAuthController;
 import dal.ParentDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +20,7 @@ import model.Parent;
  *
  * @author FPTSHOP
  */
-public class ParentInsertController extends HttpServlet {
+public class ParentInsertController extends BaseAuthController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,7 +41,7 @@ public class ParentInsertController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("../view/customer/pinsert.jsp").forward(request, response);
     }
@@ -54,7 +55,7 @@ public class ParentInsertController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String raw_pid = request.getParameter("pid");
         String raw_cid = request.getParameter("cid");

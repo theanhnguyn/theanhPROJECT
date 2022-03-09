@@ -5,6 +5,7 @@
  */
 package controller.parent;
 
+import controller.auth.BaseAuthController;
 import dal.ParentDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +20,7 @@ import model.Parent;
  *
  * @author FPTSHOP
  */
-public class ParentEditController extends HttpServlet {
+public class ParentEditController extends BaseAuthController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,7 +43,7 @@ public class ParentEditController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("pid"));
         ParentDBContext parentDB = new ParentDBContext();
@@ -60,7 +61,7 @@ public class ParentEditController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          String raw_pid = request.getParameter("pid");
         String raw_cid = request.getParameter("cid");
