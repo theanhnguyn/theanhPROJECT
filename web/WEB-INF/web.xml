@@ -32,6 +32,10 @@
         <servlet-name>ParentDeleteController</servlet-name>
         <servlet-class>controller.parent.ParentDeleteController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListAscIDController</servlet-name>
+        <servlet-class>controller.customer.ListAscIDController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SearchController</servlet-name>
         <url-pattern>/customer/search</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>ParentDeleteController</servlet-name>
         <url-pattern>/parent/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListAscIDController</servlet-name>
+        <url-pattern>/customer/listID</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

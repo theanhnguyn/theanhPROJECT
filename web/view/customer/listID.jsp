@@ -47,7 +47,7 @@
         </script>
     </head>
     <body>
-        <form action="search" method="GET" id="searchForm"> 
+        <form action="listID" method="GET" id="searchForm"> 
             Motel Floor: <select name="mid" onchange="submitForm();">
                 <option value="-1" >Please select a motel floor</option>
                 <% for (Motel m : motel) {
@@ -61,7 +61,7 @@
 
         <table border="1px">
             <tr>
-                <td><a href="listID">ID</td>
+                <td><a href="search">ID</td>
                 <td>FirstName</td>
                 <td>LastName</td>
                 <td>Gender</td>
