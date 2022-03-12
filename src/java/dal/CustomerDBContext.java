@@ -265,4 +265,45 @@ public class CustomerDBContext extends DBContext {
         }
         return customer;
     }
+
+    public ArrayList<Customer> getCustomerByDob(int mid) {
+         ArrayList<Customer> customer = new ArrayList<>();
+        try {
+            String comment = "";
+            String sql = "SELECT c.cid,c.firstName,c.lastName ,c.gender,c.dob,c.address,c.telephone,c.email,m.mname,m.mid,m.mfloor\n"
+                    + "                                       FROM Customer c INNER JOIN Motel m \n"
+                    + "                                       ON c.mid = m.mid \n"
+                    + comment
+                    + "                                       order by c.dob asc";
+            if (mid > -1) {
+                comment = "WHERE m.mid = ?";
+            }
+            PreparedStatement stm = connection.prepareStatement(sql);
+            if (mid > -1) {
+                stm.setInt(1, mid);
+            }
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+
+                Customer c = new Customer();
+                Motel m = new Motel();
+                c.setId(rs.getInt("cid"));
+                c.setFirstName(rs.getString("firstName"));
+                c.setLastName(rs.getString("lastName"));
+                c.setGender(rs.getBoolean("gender"));
+                c.setDob(rs.getDate("dob"));
+                c.setAddress(rs.getString("address"));
+                c.setEmail(rs.getString("email"));
+                c.setTelephone(rs.getInt("telephone"));
+                m.setId(rs.getInt("mid"));
+                m.setName(rs.getString("mname"));
+                m.setFloor(rs.getInt("mfloor"));
+                c.setMotel(m);
+                customer.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return customer;
+    }
 }
