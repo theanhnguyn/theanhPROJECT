@@ -47,7 +47,7 @@
         </script>
     </head>
     <body>
-        <form action="search" method="GET" id="searchForm"> 
+        <form action="../parent/listCID" method="GET" id="searchForm"> 
             Motel Floor: <select name="mid" onchange="submitForm();">
                 <option value="-1" >Please select a motel floor</option>
                 <% for (Motel m : motel) {
@@ -61,11 +61,11 @@
 
         <table border="1px">
             <tr>
-                <td><a href="listID">ID</td>
+                <td>ID</td>
                 <td>FirstName</td>
                 <td>LastName</td>
                 <td>Gender</td>
-                <td><a href="listDOB">Dob</td>
+                <td>Dob</td>
                 <td>Address</td>
                 <td>Email</td>
                 <td>Telephone</td>
@@ -95,7 +95,7 @@
         <table border="1px">
             <tr>
                 <td>Id</td>
-                <td><a href="../parent/listCID"> ChildentId</td>
+                <td><a href="../customer/search"> ChildentId</td>
                 <td>PhoneNumber</td>
                 <td>Address</td>
                 <td>Job</td>
