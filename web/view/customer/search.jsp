@@ -34,7 +34,7 @@
                     window.location.href = "delete?id=" + id;
                 }
             }
-              function deleteParent(pid)
+            function deleteParent(pid)
             {
                 var result = confirm("Are you sure?");
                 if (result)
@@ -45,8 +45,16 @@
 
 
         </script>
+          <link rel="stylesheet" href="../css/css.css">
+    <img src="../picture/welcome.jpg" alt=""/>
     </head>
     <body>
+    
+       
+        <div class="homebutton">
+        <a href="welcome">Home</a>
+        </div>
+         <div class="row">
         <form action="search" method="GET" id="searchForm"> 
             Motel Floor: <select name="mid" onchange="submitForm();">
                 <option value="-1" >Please select a motel floor</option>
@@ -58,7 +66,8 @@
                 <%}%>
             </select>
         </form>
-
+           
+            <div class = "column">
         <table border="1px">
             <tr>
                 <td><a href="listID">ID</td>
@@ -91,40 +100,52 @@
             </tr>
             <%}%>
         </table> 
-        <a href="insert">Insert Customer Info</a>
-        <table border="1px">
-            <tr>
-                <td>Id</td>
-                <td><a href="../parent/listCID"> ChildentId</td>
-                <td>PhoneNumber</td>
-                <td>Address</td>
-                <td>Job</td>
-                <td>Name</td>
-                <td>Email</td>
-                <td></td>
-            </tr>
+            </div>
 
-            <% for (Parent p : parents) {
-            %>
-            <tr>
-                <td><%=p.getId()%></td>
-                <td><%=p.getC().getId()%></td>
-                <td><%=p.getPhonenumber()%></td>
-                <td><%=p.getAddress()%></td>
-                <td><%=p.getJob()%></td>
-                <td><%=p.getPname()%></td>
-                <td><%=p.getEmail()%></td>
-                 <td> <a href="../parent/edit?pid=<%=p.getId()%>">Edit</a> 
-                       <a href="#" onclick="deleteParent(<%=p.getId()%>)">Delete</a>
-                </td>
-            </tr>
-            <%}%>
-        </table> 
-         <form action="../parent/insert">
-            <input type="submit" value="Insert Customer's Parent Info">
-        </form>
-         
+
+        <div class="button1">
+            <a href="insert">Insert Customer Info</a>
+        </div>
+    <div class ="column">
+            <table border="1px">
+                <tr>
+                    <td>Id</td>
+                    <td><a href="../parent/listCID"> ChildentId</td>
+                    <td>PhoneNumber</td>
+                    <td>Address</td>
+                    <td>Job</td>
+                    <td>Name</td>
+                    <td>Email</td>
+                    <td></td>
+                </tr>
+            
+            
+        <% for (Parent p : parents) {
+        %>
+    <tr>
+        <td><%=p.getId()%></td>
+        <td><%=p.getC().getId()%></td>
+        <td><%=p.getPhonenumber()%></td>
+        <td><%=p.getAddress()%></td>
+        <td><%=p.getJob()%></td>
+        <td><%=p.getPname()%></td>
+        <td><%=p.getEmail()%></td>
+        <td> <a href="../parent/edit?pid=<%=p.getId()%>">Edit</a> 
+            <a href="#" onclick="deleteParent(<%=p.getId()%>)">Delete</a>
+        </td>
+    </tr>
+    <%}%>
+</table> 
            
-        
-    </body>
+
+<form action="../parent/insert">
+    <input type="submit" value="Insert Customer's Parent Info">
+    </div>
+</div>
+</form>
+
+
+
+
+</body>
 </html>

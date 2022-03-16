@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,6 +23,15 @@ public class Customer {
     private String email;
     private int telephone;
     private Motel motel;
+    private ArrayList<Request> request = new ArrayList<>();
+
+    public ArrayList<Request> getRequest() {
+        return request;
+    }
+
+    public void setRequest(ArrayList<Request> request) {
+        this.request = request;
+    }
 
     public int getId() {
         return id;

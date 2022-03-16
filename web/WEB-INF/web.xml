@@ -44,6 +44,10 @@
         <servlet-name>ParentListAscCID</servlet-name>
         <servlet-class>controller.parent.ParentListAscCID</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>WelcomeController</servlet-name>
+        <servlet-class>controller.customer.WelcomeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SearchController</servlet-name>
         <url-pattern>/customer/search</url-pattern>
@@ -88,9 +92,13 @@
         <servlet-name>ParentListAscCID</servlet-name>
         <url-pattern>/parent/listCID</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WelcomeController</servlet-name>
+        <url-pattern>/customer/welcome</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            1000
+            10000000
         </session-timeout>
     </session-config>
 </web-app>
