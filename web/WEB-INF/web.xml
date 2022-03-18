@@ -48,6 +48,10 @@
         <servlet-name>WelcomeController</servlet-name>
         <servlet-class>controller.customer.WelcomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RequestController</servlet-name>
+        <servlet-class>controller.customer.RequestController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SearchController</servlet-name>
         <url-pattern>/customer/search</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>WelcomeController</servlet-name>
         <url-pattern>/customer/welcome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RequestController</servlet-name>
+        <url-pattern>/customer/request</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

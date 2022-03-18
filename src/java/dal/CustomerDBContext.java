@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Cus_Res;
 import model.Customer;
 import model.Motel;
 
@@ -267,7 +268,7 @@ public class CustomerDBContext extends DBContext {
     }
 
     public ArrayList<Customer> getCustomerByDob(int mid) {
-         ArrayList<Customer> customer = new ArrayList<>();
+        ArrayList<Customer> customer = new ArrayList<>();
         try {
             String comment = "";
             String sql = "SELECT c.cid,c.firstName,c.lastName ,c.gender,c.dob,c.address,c.telephone,c.email,m.mname,m.mid,m.mfloor\n"
@@ -305,5 +306,83 @@ public class CustomerDBContext extends DBContext {
             Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return customer;
+    }
+
+    public ArrayList<Cus_Res> getCus_Res() {
+        ArrayList<Cus_Res> cus_res = new ArrayList<>();
+        try {
+            String sql = "SELECT cid , rid  \n"
+                    + "  FROM Customer_Request ";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Cus_Res cr = new Cus_Res();
+                cr.setCid(rs.getInt("cid"));
+                cr.setRid(rs.getInt("rid"));
+                cus_res.add(cr);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cus_res;
+    }
+
+    public ArrayList<Customer> getCustomer() {
+        ArrayList<Customer> customers = new ArrayList<>();
+        try {
+            String sql = " Select cid from Customer";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Customer c = new Customer();
+                c.setId(rs.getInt("cid"));
+                customers.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return customers;
+    }
+
+    public ArrayList<Customer> getCustomerPage(int pageindex, int pagesize) {
+        ArrayList<Customer> customers = new ArrayList<>();
+        try {
+            String sql = "SELECT cid FROM\n"
+                    + "(SELECT   *,  ROW_NUMBER() over (order by cid asc) as row_index From Customer )tbl\n"
+                    + "	WHERE row_index >= (?-1)*? + 1 \n"
+                    + "	AND row_index <= ? * ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, pageindex);
+            stm.setInt(2, pagesize);
+            stm.setInt(3, pageindex);
+            stm.setInt(4, pagesize);
+
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Customer c = new Customer();
+                c.setId(rs.getInt("cid"));
+
+                customers.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return customers;
+    }
+
+    public int count() {
+
+        try {
+            String sql = "SELECT COUNT(*) as Total FROM Customer";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("Total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 }
