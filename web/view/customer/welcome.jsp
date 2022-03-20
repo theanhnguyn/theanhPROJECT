@@ -20,7 +20,8 @@
         <h1>WELCOME </h1>
          <a href="../login"> Login Info</a>
          <a href="search"> Manage</a>
-          <a href="search"> text holder</a>
+          
+          <a href="request">Payment Term</a>
     </body>
     </div>
 </html>
