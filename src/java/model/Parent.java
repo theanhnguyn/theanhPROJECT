@@ -45,7 +45,7 @@ public class Parent {
     }
 
     public String getAddress() {
-        return address;
+        return address.toUpperCase();
     }
 
     public void setAddress(String address) {
@@ -61,7 +61,7 @@ public class Parent {
     }
 
     public String getJob() {
-        return job;
+        return job.toUpperCase();
     }
 
     public void setJob(String job) {
@@ -69,7 +69,7 @@ public class Parent {
     }
 
     public String getPname() {
-        return pname;
+        return pname.toUpperCase();
     }
 
     public void setPname(String pname) {

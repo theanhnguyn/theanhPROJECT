@@ -21,7 +21,8 @@
          <a href="../login"> Login Info</a>
          <a href="search"> Manage</a>
           
-          <a href="request">Payment Term</a>
+          <a href="request">Payment Term and Special Request
+          </a>
     </body>
     </div>
 </html>

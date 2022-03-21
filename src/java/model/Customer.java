@@ -42,7 +42,7 @@ public class Customer {
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstName.toUpperCase();
     }
 
     public void setFirstName(String firstName) {
@@ -50,7 +50,7 @@ public class Customer {
     }
 
     public String getLastName() {
-        return lastName;
+        return lastName.toUpperCase();
     }
 
     public void setLastName(String lastName) {
@@ -74,7 +74,7 @@ public class Customer {
     }
 
     public String getAddress() {
-        return address;
+        return address.toUpperCase();
     }
 
     public void setAddress(String address) {

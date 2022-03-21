@@ -46,7 +46,7 @@
 
         </script>
           <link rel="stylesheet" href="../css/css.css">
-    <img src="../picture/welcome.jpg" alt=""/>
+    
     </head>
     <body>
     
@@ -104,7 +104,10 @@
 
 
         <div class="button1">
-            <a href="insert">Insert Customer Info</a>
+          
+            <form action="insert">
+                <input type="submit" value ="Insert Customer Info"
+            </form>
         </div>
     <div class ="column">
             <table border="1px">
@@ -140,7 +143,7 @@
 
 <form action="../parent/insert">
     <input type="submit" value="Insert Customer's Parent Info">
-    </div>
+    
 </div>
 </form>
 
